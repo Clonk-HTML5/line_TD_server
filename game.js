@@ -14,7 +14,7 @@ var util = require("util"),					// Utility resources (logging, object inspection
 var socket,		// Socket controller
     server = http.createServer().listen(process.env.PORT, process.env.IP),
 	players,	// Array of connected players
-    port = 5000;
+    port = process.env.PORT || 5000;
 
 
 /**************************************************
