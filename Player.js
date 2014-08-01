@@ -1,13 +1,14 @@
 /**************************************************
 ** GAME PLAYER CLASS
 **************************************************/
-var Player = function(startX, startY, angle, bulletX, bulletY, bulletAngle) {
+var Player = function(startX, startY, angle, name, bulletX, bulletY, bulletAngle) {
 	var x = startX,
 		y = startY,
         angle = angle,
         bulletX = bulletX,
         bulletY = bulletY,
         bulletAngle = bulletAngle,
+        name = name,
 		id;
 
 	// Getters and setters
@@ -34,6 +35,7 @@ var Player = function(startX, startY, angle, bulletX, bulletY, bulletAngle) {
 		setX: setX,
 		setY: setY,
         angle: angle,
+        name: name,
         bulletX: bulletX,
         bulletY: bulletY,
         bulletAngle: bulletAngle,
