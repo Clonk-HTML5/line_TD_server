@@ -1,10 +1,10 @@
 {
-  "name": "tanks-multiplayer",
+  "name": "planefight-multiplayer",
   "version": "0.0.0",
-  "description": "Phaser example gone multiplayer!",
+  "description": "Plane Fight example gone multiplayer!",
   "main": "game.js",
   "scripts": {
-    "start": "node_modules/.bin/nodemon game.js",
+    "start": "node game.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Francisco Dias",

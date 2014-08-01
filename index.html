@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <style>
+      body {
+        font-family: "Helvetica Neue", helvetica, arial;
+        padding: 15px;
+      }
+
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      ul li {
+        line-height: 1.4;
+      }
+    </style>
+
+    <script>
+        // Create an empty array to store players
+        players = [];
+        rooms = [];
+
+        // Set up Socket.IO to listen on port 8000
+        socket = io.listen(8120);
+    //	socket = io.listen(server);
+
+        util.log("Socket.io listen on Port: 8120");
+
+        // Configure Socket.IO
+        socket.configure(function() {
+            // Only use WebSockets
+            socket.set("transports", ["websocket"]);
+
+            // Restrict log output
+            socket.set("log level", 2);
+        });
+
+        // Start listening for events
+        setEventHandlers();
+    </script>
+  </head>
+  <body>
+    <h1>Pings</h1>
+    <ul id='pings'></ul>
+  </body>
+</html>

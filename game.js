@@ -13,7 +13,8 @@ var util = require("util"),					// Utility resources (logging, object inspection
 **************************************************/
 var socket,		// Socket controller
     server = http.createServer().listen(process.env.PORT, process.env.IP),
-	players;	// Array of connected players
+	players,	// Array of connected players
+    port = 5000;
 
 
 /**************************************************
@@ -25,10 +26,11 @@ function init() {
 	rooms = [];
 
 	// Set up Socket.IO to listen on port 8000
-	socket = io.listen(8120);
+	socket = io.listen(port);
+//	socket = io.listen(8120);
 //	socket = io.listen(server);
 
-    util.log("Socket.io listen on Port: 8120");
+    util.log("Socket.io listen on Port: 5000");
     
 	// Configure Socket.IO
 	socket.configure(function() {
