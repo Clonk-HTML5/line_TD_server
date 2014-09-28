@@ -30,16 +30,16 @@ function init() {
 	socket = io.listen(8120);
 //	socket = io.listen(server);
 
-    util.log("Socket.io listen on Port: 5000");
+    util.log("Socket.io listen on Port: 8120");
     
 	// Configure Socket.IO
-	socket.configure(function() {
-		// Only use WebSockets
-		socket.set("transports", ["websocket"]);
-
-		// Restrict log output
-		socket.set("log level", 2);
-	});
+//	socket.configure(function() {
+//		// Only use WebSockets
+//		socket.set("transports", ["websocket"]);
+//
+//		// Restrict log output
+//		socket.set("log level", 2);
+//	});
 
 	// Start listening for events
 	setEventHandlers();
@@ -71,6 +71,9 @@ function onSocketConnection(client) {
 	// Listen for new player message
 	client.on("new player", onNewPlayer);
 
+    // Listen for build tower message
+	client.on("build tower", onBuildTower);	
+    
 	// Listen for move player message
 	client.on("move player", onMovePlayer);	
     
@@ -176,6 +179,26 @@ function onNewPlayer(data) {
 
 // Player has moved
 function onMovePlayer(data) {
+	// Find player in array
+	var movePlayer = playerById(this.id);
+
+	// Player not found
+	if (!movePlayer) {
+		util.log("Player not found: "+this.id);
+		return;
+	};
+
+	// Update player position
+	movePlayer.setX(data.x);
+	movePlayer.setY(data.y);
+    movePlayer.angle = data.angle;
+    
+	// Broadcast updated position to connected socket clients
+	this.broadcast.emit("move player", {id: movePlayer.id, x: movePlayer.getX(), y: movePlayer.getY(), angle: movePlayer.angle});
+};
+
+// Player has moved
+function onBuildTower(data) {
 	// Find player in array
 	var movePlayer = playerById(this.id);
 
