@@ -108,25 +108,12 @@ cloak.configure({
       user.message('cardsLeft', user.room.deck[user.team].length);
     },
 
-    turnDone: function(targetId, user) {
-      // If it's currently the turn of the user and they say they're done, advance the turn
-      if (user.team === user.room.turn) {
-        user.room.turn = (user.room.turn === 'red') ? 'black' : 'red';
-      }
-      // let the other player know
-      var otherPlayer = _.reject(user.room.members, function(member) {
-        return member.id === user.id;
-      });
-      otherPlayer[0].message('placedTarget', [targetId, user.room.lastCard]);
-      // if the deck is completely empty, that's the end of the game!
-      if (user.room.deck.black.length === 0 && user.room.deck.red.length === 0) {
-        user.room.messageMembers('gameOver');
-      }
-      else {
-        // otherwise let the users know what turn it is
-        user.room.messageMembers('turn', user.room.turn);
-      }
-    }
+    buildTower: function(arg, user) {
+        user.room.messageMembers('buildTower', arg);
+    },
+    spawnEnemey: function(arg, user) {
+        user.room.messageMembers('spawnEnemey', arg);
+    },
   },
 
   room: {
@@ -144,26 +131,9 @@ cloak.configure({
     },
 
     newMember: function(user) {
-      if (this.teams.red === '') {
-        this.teams.red = user.id;
-        user.team = 'red';
-        user.message('userMessage', 'your team is red and your id is ' + user.id);
-      }
-      else if (this.teams.black === '') {
-        this.teams.black = user.id;
-        user.team = 'black';
-        user.message('userMessage', 'your team is black and your id is ' + user.id);
-      }
-      else {
-        var msg = 'Um, we tried to assign a team member but all teams were taken for this room.';
+        var msg = 'Bäämmm new Member';
         console.log(msg);
-        user.team = 'none';
         user.message('userMessage', msg);
-      }
-      user.message('assignTeam', {
-        team: user.team,
-        turn: this.turn
-      });
     },
 
     memberLeaves: function(user) {
