@@ -5,7 +5,7 @@ var _ = require('underscore');
 cloak.configure({
   // 3 hour room life
   roomLife: 1000*60*60*3,
-  port: process.env.OPENSHIFT_NODEJS_PORT ||  process.env.OPENSHIFT_INTERNAL_PORT || 8080,
+  port: process.env.OPENSHIFT_NODEJS_PORT ||  process.env.OPENSHIFT_INTERNAL_PORT || 8000,
   autoJoinLobby: false,
   minRoomMembers: 1,
   pruneEmptyRooms: 1000,
